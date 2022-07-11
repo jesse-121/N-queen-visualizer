@@ -1,6 +1,11 @@
 <html>
 <head>
 	<style>
+		*{
+			background-color:beige;
+			margin: 10px;
+		}
+
 		canvas{
 			margin:10px;
 		}
@@ -83,9 +88,9 @@
 		document.getElementById('n').oninput = function(e){
 			document.querySelector('#n-container > span').innerHTML = 'n : ' + this.value;
 
-			engineB.n = + this.value;
+			engineA.n = + this.value;
 
-			chessB.renderBoard();
+			chessA.renderBoard();
 		};
 
 		document.getElementById('run').onclick = function () {
@@ -95,7 +100,7 @@
 			const genTimer = (new Date()).getTime();
 			const backTimer = (new Date()).getTime();
 
-			chessB.run(delay).then(status => {
+			chessA.run(delay).then(status => {
 				document.querySelector('#backtracking .status').innerHTML = 'stopped';
 				document.querySelector('#backtracking .exec-time').innerHTML = ((new Date()).getTime() - genTimer) / 1000 + 's';
 				stopEvent();
@@ -104,7 +109,7 @@
 
 		document.getElementById('stop').onclick = function () {
 			chessA.stop();
-			chessB.stop();
+			chessA.stop();
 			document.querySelectorAll('.status').forEach(el => el.innerHTML = 'stopped');
 			stopEvent();
 		};
@@ -130,11 +135,11 @@
 		}
 
 		const initialN = 8;
-		const engineB = new NQueensBacktrackingEngine(initialN);
+		const engineA = new NQueensBacktrackingEngine(initialN);
 		
-		const chessB = new ChessUI(engineB, { parent : document.getElementById('backtracking-canvas') });
+		const chessA = new ChessUI(engineA, { parent : document.getElementById('backtracking-canvas') });
 
-		chessB.renderBoard();
+		chessA.renderBoard();
 	</script>
 </body>
 </html>
